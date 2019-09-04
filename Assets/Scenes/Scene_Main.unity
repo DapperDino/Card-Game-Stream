@@ -348,30 +348,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 313031072000176271, guid: 6fa105d661422134a98a94fe744315b5,
         type: 3}
-      propertyPath: Synchronization
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 313031072000176271, guid: 6fa105d661422134a98a94fe744315b5,
-        type: 3}
       propertyPath: viewIdField
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 313031072000176271, guid: 6fa105d661422134a98a94fe744315b5,
-        type: 3}
-      propertyPath: ObservedComponents.Array.data[0]
-      value: 
-      objectReference: {fileID: 3841314482617341272}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fa105d661422134a98a94fe744315b5, type: 3}
---- !u!114 &3841314482617341272 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7214313205014330590, guid: 6fa105d661422134a98a94fe744315b5,
-    type: 3}
-  m_PrefabInstance: {fileID: 3841314482617341271}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00a0ac05e19c01e4bb2581c86a07b947, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

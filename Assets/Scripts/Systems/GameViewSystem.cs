@@ -1,18 +1,48 @@
-﻿using CardGame.Models;
+﻿using CardGame.Common;
+using CardGame.Common.StateMachines;
+using CardGame.Factories;
+using CardGame.GameStates;
 using Photon.Pun;
 using UnityEngine;
 
 namespace CardGame.Systems
 {
-    public class GameViewSystem : MonoBehaviour
+    public class GameViewSystem : MonoBehaviour, IAspect
     {
-        public Match Match { get; private set; } = null;
+        private IContainer container = null;
+        private ActionSystem actionSystem = null;
+
+        public IContainer Container
+        {
+            get
+            {
+                if (container == null)
+                {
+                    container = GameFactory.Create();
+                    container.AddAspect(this);
+                }
+                return container;
+            }
+            set
+            {
+                container = value;
+            }
+        }
 
         private void Awake()
         {
-            if (!PhotonNetwork.IsMasterClient) { return; }
+            if (!PhotonNetwork.IsMasterClient)
+            {
+                Destroy(this);
+                return;
+            }
 
-            Match = new Match();
+            container.Awake();
+            actionSystem = container.GetAspect<ActionSystem>();
         }
+
+        private void Start() => container.ChangeState<PlayerIdleState>();
+
+        private void Update() => actionSystem.Update();
     }
 }

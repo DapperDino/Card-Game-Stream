@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0febdb6d506bda241aa6c8ed8013b81a, type: 3}
-  m_Name: CardDatabase_Main
+  m_Script: {fileID: 11500000, guid: e518b6d49a19b2e47be4079c7705fd15, type: 3}
+  m_Name: Card_1_Test Minion
   m_EditorClassIdentifier: 
-  cards:
-  - {fileID: 11400000, guid: b1800af5e11680546942686bc6217d2b, type: 2}
-  - {fileID: 11400000, guid: 91894aeb2327948469d261279880465b, type: 2}
+  id: 1
+  title: Test Minion

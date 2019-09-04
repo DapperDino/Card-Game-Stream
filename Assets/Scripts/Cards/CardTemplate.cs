@@ -6,9 +6,9 @@ namespace CardGame.Cards
     public class CardTemplate : ScriptableObject
     {
         [SerializeField] private int id = -1;
-        [SerializeField] private new string name = "New Card Name";
+        [SerializeField] private string title = "New Card Name";
 
         public int Id => id;
-        public string Name => name;    
+        public string Title => title;
     }
 }

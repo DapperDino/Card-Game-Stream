@@ -1,12 +1,11 @@
-﻿using CardGame.Models;
-using CardGame.Systems;
+﻿using CardGame.Systems;
 using Photon.Pun;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace CardGame.Components
 {
-    public class BoardView : MonoBehaviourPunCallbacks, IPunObservable
+    public class BoardView : MonoBehaviourPunCallbacks
     {
         [Required] [SerializeField] private GameViewSystem gameViewSystem = null;
         [SerializeField] private PlayerView[] playerViews = new PlayerView[0];
@@ -25,11 +24,6 @@ namespace CardGame.Components
             {
                 playerViews[i].SetPlayerName(i);
             }
-        }
-
-        public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-        {
-            
         }
     }
 }

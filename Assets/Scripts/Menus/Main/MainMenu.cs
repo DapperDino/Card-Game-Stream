@@ -54,7 +54,7 @@ namespace CardGame.Menus.Main
             waitingStatusPanel.SetActive(false);
             findOpponentPanel.SetActive(true);
 
-            Debug.LogWarning($"Disconnected due to : {cause}");
+            Debug.LogWarning($"Disconnected due to: {cause}");
         }
 
         public override void OnJoinRandomFailed(short returnCode, string message)
