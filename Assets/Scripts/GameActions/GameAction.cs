@@ -25,19 +25,19 @@ namespace CardGame.GameActions
 
         protected virtual void OnPrepareKeyFrame(IContainer game)
         {
-            var notificationName = $"{GetType().Name}.OnPrepare";
+            var notificationName = NotificationHelper.PrepareNotification(GetType());
             game.PostNotification(notificationName, this);
         }
 
         protected virtual void OnPerformKeyFrame(IContainer game)
         {
-            var notificationName = $"{GetType().Name}.OnPerform";
+            var notificationName = NotificationHelper.PerformNotification(GetType());
             game.PostNotification(notificationName, this);
         }
 
         protected virtual void OnCancelKeyFrame(IContainer game)
         {
-            var notificationName = $"{GetType().Name}.OnCancel";
+            var notificationName = NotificationHelper.CancelNotification(GetType());
             game.PostNotification(notificationName, this);
         }
     }

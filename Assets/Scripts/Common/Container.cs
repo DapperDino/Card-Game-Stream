@@ -14,7 +14,7 @@ namespace CardGame.Common
         {
             key = key ?? typeof(T).Name;
             aspects.Add(key, aspect);
-            aspect.Container = this;
+            aspect.Game = this;
             return aspect;
         }
 

@@ -2,6 +2,6 @@
 {
     public class Aspect : IAspect
     {
-        public IContainer Container { get; set; }
+        public IContainer Game { get; set; }
     }
 }

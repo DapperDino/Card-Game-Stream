@@ -7,12 +7,12 @@ namespace CardGame.Models
     [Serializable]
     public class Player
     {
-        public Player(int index)
+        public Player(byte index)
         {
             Index = index;
         }
 
-        public int Index { get; }
+        public byte Index { get; }
         public List<Card> Deck { get; } = new List<Card>();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using CardGame.Common;
 using CardGame.Common.StateMachines;
+using CardGame.GameStates;
 using CardGame.Systems;
 
 namespace CardGame.Factories
@@ -10,9 +11,14 @@ namespace CardGame.Factories
         {
             var game = new Container();
 
+            // Add Systems
             game.AddAspect<ActionSystem>();
+            game.AddAspect<DataSystem>();
+            game.AddAspect<MatchSystem>();
 
+            // Add Others
             game.AddAspect<StateMachine>();
+            game.AddAspect<GameState>();
 
             return game;
         }

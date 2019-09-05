@@ -9,7 +9,7 @@
         {
             IState fromState = CurrentState;
 
-            T toState = Container.GetAspect<T>() ?? Container.AddAspect<T>();
+            T toState = Game.GetAspect<T>() ?? Game.AddAspect<T>();
 
             if (fromState != null)
             {

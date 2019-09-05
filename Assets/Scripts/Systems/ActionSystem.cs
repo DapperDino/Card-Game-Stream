@@ -80,7 +80,7 @@ namespace CardGame.Systems
             if (isActionCancelled ^ isCancelPhase) { yield break; }
 
             var reactions = openReactions = new List<GameAction>();
-            var flow = phase.Flow(Container);
+            var flow = phase.Flow(Game);
             while (flow.MoveNext()) { yield return null; }
 
             flow = ReactPhase(reactions);
@@ -101,9 +101,8 @@ namespace CardGame.Systems
 
         private IEnumerator EventPhase(string notificationName, GameAction action, bool repeats = false)
         {
-            var reactions = new List<GameAction>();
+            List<GameAction> reactions;
             openReactions = new List<GameAction>();
-
             do
             {
                 reactions = openReactions = new List<GameAction>();

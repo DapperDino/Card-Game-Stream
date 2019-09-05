@@ -1,29 +1,19 @@
-﻿using CardGame.Systems;
-using Photon.Pun;
+﻿using Photon.Pun;
 using Sirenix.OdinInspector;
+using TMPro;
 using UnityEngine;
 
 namespace CardGame.Components
 {
     public class BoardView : MonoBehaviourPunCallbacks
     {
-        [Required] [SerializeField] private GameViewSystem gameViewSystem = null;
-        [SerializeField] private PlayerView[] playerViews = new PlayerView[0];
+        [Required] [SerializeField] TextMeshProUGUI allyNameText = null;
+        [Required] [SerializeField] TextMeshProUGUI opponentNameText = null;
 
         private void Start()
         {
-            if (!PhotonNetwork.IsMasterClient) { return; }
-
-            photonView.RPC("SetPlayerNames", RpcTarget.All);
-        }
-
-        [PunRPC]
-        private void SetPlayerNames()
-        {
-            for (int i = 0; i < playerViews.Length; i++)
-            {
-                playerViews[i].SetPlayerName(i);
-            }
+            allyNameText.text = PhotonNetwork.LocalPlayer.NickName;
+            opponentNameText.text = PhotonNetwork.PlayerListOthers[0].NickName;
         }
     }
 }

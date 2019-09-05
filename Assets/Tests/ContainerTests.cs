@@ -6,8 +6,8 @@ namespace Tests
 {
     public class ContainerTests
     {
-        private class TestAspect : IAspect { public IContainer Container { get; set; } }
-        private class AltTestAspect : IAspect { public IContainer Container { get; set; } }
+        private class TestAspect : IAspect { public IContainer Game { get; set; } }
+        private class AltTestAspect : IAspect { public IContainer Game { get; set; } }
 
         [Test]
         public void AddingAspectToContainer_AspectIsAdded()

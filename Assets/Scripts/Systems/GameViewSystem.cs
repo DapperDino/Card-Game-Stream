@@ -9,23 +9,23 @@ namespace CardGame.Systems
 {
     public class GameViewSystem : MonoBehaviour, IAspect
     {
-        private IContainer container = null;
+        private IContainer game = null;
         private ActionSystem actionSystem = null;
 
-        public IContainer Container
+        public IContainer Game
         {
             get
             {
-                if (container == null)
+                if (game == null)
                 {
-                    container = GameFactory.Create();
-                    container.AddAspect(this);
+                    game = GameFactory.Create();
+                    game.AddAspect(this);
                 }
-                return container;
+                return game;
             }
             set
             {
-                container = value;
+                game = value;
             }
         }
 
@@ -37,11 +37,11 @@ namespace CardGame.Systems
                 return;
             }
 
-            container.Awake();
-            actionSystem = container.GetAspect<ActionSystem>();
+            Game.Awake();
+            actionSystem = game.GetAspect<ActionSystem>();
         }
 
-        private void Start() => container.ChangeState<PlayerIdleState>();
+        private void Start() => Game.ChangeState<PlayerIdleState>();
 
         private void Update() => actionSystem.Update();
     }

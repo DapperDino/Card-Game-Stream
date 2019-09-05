@@ -1,6 +1,7 @@
 ﻿using Photon.Pun;
 using Photon.Realtime;
 using Sirenix.OdinInspector;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -63,6 +64,8 @@ namespace CardGame.Menus.Main
 
             var roomOptions = new RoomOptions
             {
+                EmptyRoomTtl = 1000 * 60,
+                PlayerTtl = 1000 * 60,
                 MaxPlayers = MaxPlayersPerRoom,
             };
 
@@ -75,9 +78,9 @@ namespace CardGame.Menus.Main
 
             int playerCount = PhotonNetwork.CurrentRoom.PlayerCount;
 
-            if(playerCount != MaxPlayersPerRoom)
+            if (playerCount != MaxPlayersPerRoom)
             {
-                waitingStatusText.text = "Waiting For Opponent...";              
+                waitingStatusText.text = "Waiting For Opponent...";
                 Debug.Log("Client is waiting for an opponent");
             }
             else
@@ -89,12 +92,25 @@ namespace CardGame.Menus.Main
 
         public override void OnPlayerEnteredRoom(Player newPlayer)
         {
-            if(PhotonNetwork.CurrentRoom.PlayerCount == MaxPlayersPerRoom)
+            if (PhotonNetwork.CurrentRoom.PlayerCount == MaxPlayersPerRoom)
             {
                 PhotonNetwork.CurrentRoom.IsOpen = false;
 
                 Debug.Log("Match is ready to start");
                 waitingStatusText.text = "Opponent Found";
+
+                List<byte> availableIndices = new List<byte>() { 0, 1 };
+
+                for (int i = 1; i < 3; i++)
+                {
+                    byte chosenIndex = availableIndices[Random.Range(0, availableIndices.Count)];
+                    availableIndices.Remove(chosenIndex);
+                    ExitGames.Client.Photon.Hashtable playerProperties = new ExitGames.Client.Photon.Hashtable
+                    {
+                        { "TurnIndex", chosenIndex }
+                    };
+                    PhotonNetwork.CurrentRoom.Players[i].SetCustomProperties(playerProperties);
+                }
 
                 PhotonNetwork.LoadLevel("Scene_Main");
             }
