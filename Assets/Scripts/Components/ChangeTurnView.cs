@@ -4,12 +4,12 @@ using CardGame.Common.StateMachines;
 using CardGame.GameActions;
 using CardGame.GameStates;
 using CardGame.Systems;
+using DG.Tweening;
 using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
 using Sirenix.OdinInspector;
 using System.Collections;
-using TheLiquidFire.Animation;
 using UnityEngine;
 
 namespace CardGame.Components
@@ -75,8 +75,8 @@ namespace CardGame.Components
             {
                 case EventCodes.OnFirstTurnStart:
                     var firstTurnPlayerIndex = (byte)photonEvent.CustomData;
-                    Quaternion targetRotation = GetTargetButtonRotation(firstTurnPlayerIndex);
-                    buttonView.RotationHandle.rotation = targetRotation;
+                    float targetRotation = GetTargetButtonRotation(firstTurnPlayerIndex);
+                    buttonView.RotationHandle.eulerAngles = new Vector3(targetRotation, 0f, 0f);
                     return;
 
                 case EventCodes.OnChangeTurnRequested:
@@ -145,32 +145,30 @@ namespace CardGame.Components
             var myTurnIndex = (byte)PhotonNetwork.LocalPlayer.CustomProperties["TurnIndex"];
             if (myTurnIndex != targetPlayerIndex) { yield break; }
 
-            var tweener = yourTurnBanner.ScaleTo(Vector3.one, 0.25f, EasingEquations.EaseInOutBack);
-            while (tweener.IsPlaying) { yield return null; }
+            var sequence = DOTween.Sequence()
+                .Append(yourTurnBanner.DOScale(Vector3.one, 0.5f).SetEase(Ease.OutBack))
+                .AppendInterval(1f)
+                .Append(yourTurnBanner.DOScale(new Vector3(0f, 1f, 0f), 0.5f).SetEase(Ease.InBack));
 
-            tweener = yourTurnBanner.Wait(1f);
-            while (tweener.IsPlaying) { yield return null; }
-
-            tweener = yourTurnBanner.ScaleTo(new Vector3(0f, 1f, 0f), 0.25f, EasingEquations.EaseInBack);
-            while (tweener.IsPlaying) { yield return null; }
+            yield return sequence.WaitForCompletion();
         }
 
         private IEnumerator FlipButton(byte targetPlayerIndex)
         {
             var targetRotation = GetTargetButtonRotation(targetPlayerIndex);
-            var tweener = buttonView.RotationHandle.RotateTo(targetRotation, 0.5f, EasingEquations.EaseOutBack);
-            yield return null;
+            float rotation = targetRotation == 0f ? 180f : 0f;
+
+            var tweener = DOTween.To(() => rotation, x => rotation = x, targetRotation, 1f)
+                .SetEase(Ease.OutBack)
+                .OnUpdate(() => buttonView.RotationHandle.transform.eulerAngles = new Vector3(rotation, 0f, 0f));
+
+            yield return tweener.WaitForCompletion();
         }
 
-        private Quaternion GetTargetButtonRotation(byte targetPlayerIndex)
+        private float GetTargetButtonRotation(byte targetPlayerIndex)
         {
-            var up = Quaternion.identity;
-            var down = Quaternion.Euler(new Vector3(180f, 0f, 0f));
-
             var myTurnIndex = (byte)PhotonNetwork.LocalPlayer.CustomProperties["TurnIndex"];
-            var targetRotation = targetPlayerIndex == myTurnIndex ? up : down;
-
-            return targetRotation;
+            return targetPlayerIndex == myTurnIndex ? 0 : 180;
         }
     }
 }
