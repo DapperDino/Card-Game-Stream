@@ -1,4 +1,5 @@
-﻿using Photon.Pun;
+﻿using CardGame.Common.Extensions;
+using Photon.Pun;
 using Photon.Realtime;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
@@ -103,7 +104,7 @@ namespace CardGame.Menus.Main
 
                 for (int i = 1; i < 3; i++)
                 {
-                    byte chosenIndex = availableIndices[Random.Range(0, availableIndices.Count)];
+                    byte chosenIndex = availableIndices.Random();
                     availableIndices.Remove(chosenIndex);
                     ExitGames.Client.Photon.Hashtable playerProperties = new ExitGames.Client.Photon.Hashtable
                     {

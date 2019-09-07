@@ -2,13 +2,19 @@
 
 namespace CardGame.Cards
 {
-    [CreateAssetMenu(fileName = "New Card", menuName = "Cards/Card")]
-    public class CardTemplate : ScriptableObject
+    public abstract class CardTemplate : ScriptableObject
     {
+        [Header("Base Card Data")]
         [SerializeField] private int id = -1;
-        [SerializeField] private string title = "New Card Name";
+        [SerializeField] private new string name = "New Card Name";
+        [SerializeField] private string description = "New Card Description";
+        [SerializeField] private int manaCost = 0;
 
         public int Id => id;
-        public string Title => title;
+        public string Name => name;
+        public string Description => description;
+        public int ManaCost => manaCost;
+
+        public abstract Card CreateInstance(byte ownerIndex);
     }
 }

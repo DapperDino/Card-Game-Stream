@@ -80,7 +80,7 @@ namespace CardGame.Systems
             if (isActionCancelled ^ isCancelPhase) { yield break; }
 
             var reactions = openReactions = new List<GameAction>();
-            var flow = phase.Flow(Game);
+            var flow = phase.Flow(Container);
             while (flow.MoveNext()) { yield return null; }
 
             flow = ReactPhase(reactions);

@@ -19,7 +19,7 @@ namespace CardGame.GameStates
             this.RemoveObserver(OnCompleteAllActions, ActionSystem.OnCompleteNotification);
         }
 
-        private void OnBeginSequence(object sender, object args) => Game.ChangeState<SequenceState>();
-        private void OnCompleteAllActions(object sender, object args) => Game.ChangeState<PlayerIdleState>();
+        private void OnBeginSequence(object sender, object args) => Container.ChangeState<SequenceState>();
+        private void OnCompleteAllActions(object sender, object args) => Container.ChangeState<PlayerIdleState>();
     }
 }

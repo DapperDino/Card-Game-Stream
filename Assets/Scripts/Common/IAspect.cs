@@ -2,6 +2,6 @@
 {
     public interface IAspect
     {
-        IContainer Game { get; set; }
+        IContainer Container { get; set; }
     }
 }

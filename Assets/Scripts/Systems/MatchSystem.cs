@@ -11,17 +11,17 @@ namespace CardGame.Systems
     {
         public void Awake()
         {
-            this.AddObserver(OnPerformChangeTurn, NotificationHelper.PerformNotification<ChangeTurnAction>(), Game);
+            this.AddObserver(OnPerformChangeTurn, NotificationHelper.PerformNotification<ChangeTurnAction>(), Container);
         }
 
         public void Destroy()
         {
-            this.RemoveObserver(OnPerformChangeTurn, NotificationHelper.PerformNotification<ChangeTurnAction>(), Game);
+            this.RemoveObserver(OnPerformChangeTurn, NotificationHelper.PerformNotification<ChangeTurnAction>(), Container);
         }
 
         public void ChangeTurn()
         {
-            var match = Game.GetMatch();
+            var match = Container.GetMatch();
             byte nextPlayerIndex = (byte)(1 - match.CurrentPlayerIndex);
             ChangeTurn(nextPlayerIndex);
         }
@@ -29,13 +29,13 @@ namespace CardGame.Systems
         public void ChangeTurn(byte nextPlayerIndex)
         {
             var action = new ChangeTurnAction(nextPlayerIndex);
-            Game.Perform(action);
+            Container.Perform(action);
         }
 
         private void OnPerformChangeTurn(object sender, object args)
         {
             var action = args as ChangeTurnAction;
-            var match = Game.GetMatch();
+            var match = Container.GetMatch();
             match.CurrentPlayerIndex = action.TargetPlayerIndex;
 
             var raiseEventoptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others };

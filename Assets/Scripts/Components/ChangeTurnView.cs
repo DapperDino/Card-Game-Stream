@@ -25,7 +25,7 @@ namespace CardGame.Components
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                game = GetComponentInParent<GameViewSystem>().Game;
+                game = GetComponentInParent<GameViewSystem>().Container;
             }
         }
 

@@ -12,7 +12,7 @@ namespace CardGame.Systems
         private IContainer game = null;
         private ActionSystem actionSystem = null;
 
-        public IContainer Game
+        public IContainer Container
         {
             get
             {
@@ -37,11 +37,11 @@ namespace CardGame.Systems
                 return;
             }
 
-            Game.Awake();
+            Container.Awake();
             actionSystem = game.GetAspect<ActionSystem>();
         }
 
-        private void Start() => Game.ChangeState<PlayerIdleState>();
+        private void Start() => Container.ChangeState<PlayerIdleState>();
 
         private void Update() => actionSystem.Update();
     }

@@ -15,6 +15,7 @@ namespace CardGame.Factories
             game.AddAspect<ActionSystem>();
             game.AddAspect<DataSystem>();
             game.AddAspect<MatchSystem>();
+            game.AddAspect<PlayerSystem>();
 
             // Add Others
             game.AddAspect<StateMachine>();
