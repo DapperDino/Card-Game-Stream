@@ -1,7 +1,7 @@
 ﻿using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace CardGame.Components
+namespace CardGame.Views
 {
     public class DeckView : MonoBehaviour
     {

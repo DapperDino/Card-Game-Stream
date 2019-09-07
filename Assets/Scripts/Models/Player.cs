@@ -7,14 +7,16 @@ namespace CardGame.Models
     [Serializable]
     public class Player
     {
-        public const int MaxDeck = 30;
+        public const int MaxDeck = 5;
+        public const int MaxHand = 3;
 
         public Player(byte index)
         {
             Index = index;
         }
 
-        public byte Index { get; }
+        public byte Index { get; } = 0;
+        public int Fatigue { get; set; } = 0;
         public Mana Mana { get; } = new Mana();
         public List<Card> Hero { get; } = new List<Card>();
         public List<Card> Deck { get; } = new List<Card>();

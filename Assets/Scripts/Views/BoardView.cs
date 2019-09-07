@@ -3,7 +3,7 @@ using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 
-namespace CardGame.Components
+namespace CardGame.Views
 {
     public class BoardView : MonoBehaviourPunCallbacks
     {

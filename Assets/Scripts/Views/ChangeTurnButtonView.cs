@@ -2,7 +2,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace CardGame.Components
+namespace CardGame.Views
 {
     public class ChangeTurnButtonView : MonoBehaviour
     {

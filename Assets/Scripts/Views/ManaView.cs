@@ -3,7 +3,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CardGame.Components
+namespace CardGame.Views
 {
     public class ManaView : MonoBehaviour
     {

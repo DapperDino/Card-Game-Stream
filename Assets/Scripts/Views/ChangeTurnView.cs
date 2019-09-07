@@ -12,7 +12,7 @@ using Sirenix.OdinInspector;
 using System.Collections;
 using UnityEngine;
 
-namespace CardGame.Components
+namespace CardGame.Views
 {
     public class ChangeTurnView : MonoBehaviour, IOnEventCallback
     {
@@ -79,7 +79,7 @@ namespace CardGame.Components
                     buttonView.RotationHandle.eulerAngles = new Vector3(targetRotation, 0f, 0f);
                     return;
 
-                case EventCodes.OnChangeTurnRequested:
+                case EventCodes.OnChangeTurnRequest:
                     var requestedPlayerIndex = (byte)photonEvent.CustomData;
                     if (CanChangeTurn(requestedPlayerIndex))
                     {
@@ -87,7 +87,7 @@ namespace CardGame.Components
                         matchSystem.ChangeTurn();
                     }
                     return;
-                case EventCodes.OnTurnChanged:
+                case EventCodes.OnTurnChange:
                     var targetPlayerIndex = (byte)photonEvent.CustomData;
                     StartCoroutine(ChangeTurnDisplay(targetPlayerIndex));
                     return;
@@ -99,7 +99,7 @@ namespace CardGame.Components
             var myTurnIndex = (byte)PhotonNetwork.LocalPlayer.CustomProperties["TurnIndex"];
             var raiseEventoptions = new RaiseEventOptions { Receivers = ReceiverGroup.MasterClient };
             var sendOptions = new SendOptions { Reliability = true };
-            PhotonNetwork.RaiseEvent(EventCodes.OnChangeTurnRequested, myTurnIndex, raiseEventoptions, sendOptions);
+            PhotonNetwork.RaiseEvent(EventCodes.OnChangeTurnRequest, myTurnIndex, raiseEventoptions, sendOptions);
         }
 
         private bool CanChangeTurn(byte requestedPlayerIndex)
@@ -150,7 +150,7 @@ namespace CardGame.Components
                 .AppendInterval(1f)
                 .Append(yourTurnBanner.DOScale(new Vector3(0f, 1f, 0f), 0.5f).SetEase(Ease.InBack));
 
-            yield return sequence.WaitForCompletion();
+            while (sequence.IsActive()) { yield return null; }
         }
 
         private IEnumerator FlipButton(byte targetPlayerIndex)
@@ -162,7 +162,7 @@ namespace CardGame.Components
                 .SetEase(Ease.OutBack)
                 .OnUpdate(() => buttonView.RotationHandle.transform.eulerAngles = new Vector3(rotation, 0f, 0f));
 
-            yield return tweener.WaitForCompletion();
+            while (tweener.IsActive()) { yield return null; }
         }
 
         private float GetTargetButtonRotation(byte targetPlayerIndex)

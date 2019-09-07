@@ -7,7 +7,7 @@ namespace CardGame.Cards
     {
         [Header("Minion Data")]
         [SerializeField] private int attack = 0;
-        [SerializeField] private int maxHealth = 0;
+        [SerializeField] private int maxHealth = 1;
 
         public int Attack => attack;
         public int MaxHealth => maxHealth;

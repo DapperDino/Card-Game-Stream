@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CardGame.Components
+namespace CardGame.Views
 {
     public class CardView : MonoBehaviour
     {
@@ -18,8 +18,8 @@ namespace CardGame.Components
         [Required] [SerializeField] private TextMeshProUGUI descriptionText;
 
         public bool IsFaceUp { get; private set; } = false;
+        public Card Card { get; set; } = null;
 
-        private Card card = null;
         private GameObject[] faceUpElements = null;
         private GameObject[] faceDownElements = null;
 
@@ -43,7 +43,7 @@ namespace CardGame.Components
             Flip(IsFaceUp);
         }
 
-        private void Flip(bool shouldShow)
+        public void Flip(bool shouldShow)
         {
             IsFaceUp = shouldShow;
 
@@ -65,11 +65,11 @@ namespace CardGame.Components
         {
             if (!IsFaceUp) { return; }
 
-            manaCostText.text = card.ManaCost.ToString();
-            titleText.text = card.Name;
-            descriptionText.text = card.Description;
+            manaCostText.text = Card.ManaCost.ToString();
+            titleText.text = Card.Name;
+            descriptionText.text = Card.Description;
 
-            if (card is Minion minion)
+            if (Card is Minion minion)
             {
                 attackText.text = minion.Attack.ToString();
                 healthText.text = minion.MaxHealth.ToString();

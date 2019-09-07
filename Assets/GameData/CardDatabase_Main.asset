@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: CardDatabase_Main
   m_EditorClassIdentifier: 
   cards:
-  - {fileID: 11400000, guid: b1800af5e11680546942686bc6217d2b, type: 2}
-  - {fileID: 11400000, guid: 91894aeb2327948469d261279880465b, type: 2}
+  - {fileID: 11400000, guid: 22ea8efe520498e458c67e5c098be276, type: 2}

@@ -40,7 +40,7 @@ namespace CardGame.Systems
 
             var raiseEventoptions = new RaiseEventOptions { Receivers = ReceiverGroup.Others };
             var sendOptions = new SendOptions { Reliability = true };
-            PhotonNetwork.RaiseEvent(EventCodes.OnTurnChanged, match.CurrentPlayerIndex, raiseEventoptions, sendOptions);
+            PhotonNetwork.RaiseEvent(EventCodes.OnTurnChange, match.CurrentPlayerIndex, raiseEventoptions, sendOptions);
         }
     }
 }
