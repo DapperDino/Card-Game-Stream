@@ -18,7 +18,7 @@ namespace CardGame.Models
         public byte Index { get; } = 0;
         public int Fatigue { get; set; } = 0;
         public Mana Mana { get; } = new Mana();
-        public List<Card> Hero { get; } = new List<Card>();
+        public Hero Hero { get; set; } = null;
         public List<Card> Deck { get; } = new List<Card>();
         public List<Card> Hand { get; } = new List<Card>();
         public List<Card> Battlefield { get; } = new List<Card>();

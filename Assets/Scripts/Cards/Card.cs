@@ -1,6 +1,6 @@
 ﻿namespace CardGame.Cards
 {
-    public abstract class Card
+    public abstract class Card : ICard
     {
         protected CardTemplate template = null;
 

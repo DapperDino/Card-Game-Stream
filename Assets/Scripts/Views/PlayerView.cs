@@ -5,6 +5,7 @@ namespace CardGame.Views
 {
     public class PlayerView : MonoBehaviour
     {
+        [Required] [SerializeField] private HeroView heroView = null;
         [Required] [SerializeField] private DeckView deckView = null;
         [Required] [SerializeField] private HandView handView = null;
 

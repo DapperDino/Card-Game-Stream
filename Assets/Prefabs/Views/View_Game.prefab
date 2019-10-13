@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a95fe3d341e3cb498a1a56cd6f8207f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardDatabase: {fileID: 11400000, guid: b89e56b911952ca408a990d1aca3a515, type: 2}
   testMinion: {fileID: 11400000, guid: 22ea8efe520498e458c67e5c098be276, type: 2}
 --- !u!1001 &7392077078621755399
 PrefabInstance:
@@ -111,6 +112,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4639854214655812137, guid: 35565d4a4260cc04791d28ded15352a5,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35565d4a4260cc04791d28ded15352a5, type: 3}

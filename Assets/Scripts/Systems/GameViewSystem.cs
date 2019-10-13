@@ -13,6 +13,7 @@ namespace CardGame.Systems
 {
     public class GameViewSystem : MonoBehaviour, IAspect
     {
+        [Required] [SerializeField] private CardDatabase cardDatabase = null;
         [Required] [SerializeField] private MinionTemplate testMinion = null;
 
         private IContainer game = null;
@@ -56,14 +57,19 @@ namespace CardGame.Systems
         {
             var match = Container.GetMatch();
 
-            for (byte i = 0; i < match.Players.Length; i++)
+            foreach (var player in PhotonNetwork.CurrentRoom.Players)
             {
+                var turnIndex = (byte)player.Value.CustomProperties["TurnIndex"];
+                var heroIndex = (int)player.Value.CustomProperties["HeroIndex"];
+
+                match.Players[turnIndex].Hero = cardDatabase.GetHeroById(heroIndex).CreateInstance(turnIndex);
+
                 var cards = new List<Card>();
-                for (int j = 0; j < Player.MaxDeck; j++)
+                for (int i = 0; i < Player.MaxDeck; i++)
                 {
-                    cards.Add(testMinion.CreateInstance(i));
+                    cards.Add(testMinion.CreateInstance(turnIndex));
                 }
-                match.Players[i].Deck.AddRange(cards);
+                match.Players[turnIndex].Deck.AddRange(cards);
             }
         }
     }

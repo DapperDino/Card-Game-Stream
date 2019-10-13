@@ -1,4 +1,5 @@
-﻿using CardGame.Common;
+﻿using CardGame.Cards;
+using CardGame.Common;
 using CardGame.Common.Extensions;
 using CardGame.Common.Notifications;
 using CardGame.GameActions;
@@ -94,6 +95,10 @@ namespace CardGame.Systems
         {
             var fatigueAction = args as FatigueAction;
             fatigueAction.Player.Fatigue++;
+
+            var target = fatigueAction.Player.Hero as IDestructable;
+            var damageAction = new DamageAction(target, fatigueAction.Player.Fatigue);
+            Container.AddReaction(damageAction);
 
             var raiseEventoptions = new Photon.Realtime.RaiseEventOptions { Receivers = Photon.Realtime.ReceiverGroup.Others };
             var sendOptions = new SendOptions { Reliability = true };

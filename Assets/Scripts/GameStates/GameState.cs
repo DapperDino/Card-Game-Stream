@@ -20,6 +20,16 @@ namespace CardGame.GameStates
         }
 
         private void OnBeginSequence(object sender, object args) => Container.ChangeState<SequenceState>();
-        private void OnCompleteAllActions(object sender, object args) => Container.ChangeState<PlayerIdleState>();
+        private void OnCompleteAllActions(object sender, object args)
+        {
+            if (Container.GetAspect<VictorySystem>().IsGameOver())
+            {
+                Container.ChangeState<GameOverState>();
+            }
+            else
+            {
+                Container.ChangeState<PlayerIdleState>();
+            }
+        }
     }
 }

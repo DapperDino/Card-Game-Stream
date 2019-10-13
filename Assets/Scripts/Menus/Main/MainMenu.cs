@@ -108,6 +108,7 @@ namespace CardGame.Menus.Main
                     availableIndices.Remove(chosenIndex);
                     ExitGames.Client.Photon.Hashtable playerProperties = new ExitGames.Client.Photon.Hashtable
                     {
+                        { "HeroIndex", 0 },
                         { "TurnIndex", chosenIndex }
                     };
                     PhotonNetwork.CurrentRoom.Players[i].SetCustomProperties(playerProperties);

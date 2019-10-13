@@ -9,10 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0febdb6d506bda241aa6c8ed8013b81a, type: 3}
-  m_Name: CardDatabase_Main
+  m_Script: {fileID: 11500000, guid: 1b96036be354b454ab5fd2a8e175f858, type: 3}
+  m_Name: 0_Card_TestMinion
   m_EditorClassIdentifier: 
-  heros:
-  - {fileID: 11400000, guid: 68f706296cb586848a8942163db95c57, type: 2}
-  cards:
-  - {fileID: 11400000, guid: 22ea8efe520498e458c67e5c098be276, type: 2}
+  id: 0
+  name: Test Minion
+  description: This is a test
+  manaCost: 3
+  attack: 2
+  maxHealth: 4
